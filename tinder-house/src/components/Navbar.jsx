@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <div> 
     <div className = "flex flex-row justify-between items-center px-20 py-4 bg-lightBlue">
-        <div className='text-darkBlue text-3xl poppins-bold'>Young Planners</div>
+        <div className='text-darkBlue text-3xl poppins-bold'>Tinder Houses</div>
         <div className = "flex flex-row gap-8 poppins-medium "> 
             <Link to = "/" className = " hover:text-blue1 transition duration-300"> Home </Link>
             <Link to = "/finance" className = " hover:text-blue1 transition duration-300"> Financial Planning</Link>
