@@ -8,26 +8,29 @@ import Profile from './Pages/profile'
 import Login from './Pages/login'
 import Register from './Pages/register'
 import PrivateRoute from "./components/PrivateRoute"
+import {AuthProvider} from './Contexts/authContext'
 
 
 
 function App() {
   return (
-    <div className = "bg-white">
+    <AuthProvider>
+         <div className = "bg-white">
     <Router>
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/finance" element={<Finance/>}/>
         <Route path="/houses" element={<Houses/>}/>
-        <Route path= "/Profile" element={<Profile/>}/>
+        <Route path= "/Profile" element={<PrivateRoute><Profile/></PrivateRoute>}/>
         <Route path="/Login" element={<Login/>}/>
         <Route path="/Register" element={<Register/>}/>
-        
-
+      
       </Routes>
     </Router>
   </div> 
+    </AuthProvider>
+   
   );
 }
 
