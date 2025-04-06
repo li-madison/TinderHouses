@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json'; // adjust the path if needed
-import Card from './Card'; // make sure this path is correct
+import Card from '../components/Card'; // make sure this path is correct
 
 function Home() {
   const [offers, setOffers] = useState([]);
