@@ -330,6 +330,29 @@ const Chatbot = () => {
     setUserInput('');
   };
 
+  const logFavorites = (favorites) => {
+    if (!Array.isArray(favorites) || favorites.length === 0) {
+      console.log('No favorite houses available.');
+      return;
+    }
+  
+    favorites.forEach((house, index) => {
+      console.log(`House ${index + 1}:`);
+      console.log(`  ID: ${house.id}`);
+      console.log(`  Address: ${house.street_address}, ${house.city}, ${house.state} ${house.zip_code}`);
+      console.log(`  Price: $${house.price.toLocaleString()}`);
+      console.log(`  Bedroom Count: ${house.bedroom_count}`);
+      console.log(`  Bathroom Count: ${house.bathroom_count}`);
+      console.log(`  Square Footage: ${house.sq_ft}`);
+      console.log(`  Risks: `);
+      Object.entries(house.risks).forEach(([riskType, riskLevel]) => {
+        console.log(`    ${riskType}: ${riskLevel}`);
+      });
+      console.log('-------------------------------------');
+    });
+  };
+
+  logFavorites(favorites);
   return (
     <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}>
       {isOpen && (
@@ -366,7 +389,7 @@ const Chatbot = () => {
               </div>
             ))}
           </div>
-
+             
           <div style={{ display: 'flex', padding: '10px', borderTop: '1px solid #eee' }}>
             <input
               type="text"
