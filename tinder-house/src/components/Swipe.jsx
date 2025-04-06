@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaXmark, FaRegHeart } from 'react-icons/fa6';
 import { LuBedDouble, LuToilet } from "react-icons/lu";
 import { motion, AnimatePresence } from 'framer-motion';
+import { IoMdHeartDislike } from "react-icons/io";
 import listingsData from '../Pages/real_estate_houses_with_ids.json'; // update path as needed
 
 function Matches() {
@@ -129,7 +130,7 @@ function Matches() {
                   onClick={() => setFavorites(favorites.filter((favorite) => favorite.id !== fav.id))}
                   className="absolute top-2 right-2 bg-pink-500 text-white p-2 rounded-full"
                 >
-                  <FaRegHeart />
+                  <IoMdHeartDislike />
                 </button>
               </motion.div>
             ))}
