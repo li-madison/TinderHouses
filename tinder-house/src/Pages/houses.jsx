@@ -38,9 +38,9 @@ function Matches() {
         <LuToilet className="" /><p className="pl-4">{listing.bathroom_count} Bathrooms</p>
         </div>
         </div>
-        <div className="p-2 py-1 bg-black text-white text-center rounded-xl">
-          more
-          </div>
+         <div  className="bg-[#2b1b12] text-white font-semibold text-lg px-3 py-1 mr-8 mt-2 rounded-lg self-start lg:self-auto">
+              More
+            </div>
           
         </div>
         
