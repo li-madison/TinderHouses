@@ -29,6 +29,7 @@ function App() {
       
       </Routes>
     </Router>
+    <Chatbot /> {/* Add the Chatbot component here */}
   </div> 
     </AuthProvider>
    
