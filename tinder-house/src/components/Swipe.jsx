@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { FaXmark, FaRegHeart } from 'react-icons/fa6';
 import { LuBedDouble, LuToilet } from "react-icons/lu";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,9 +10,9 @@ import { ProfileContext } from '../Contexts/ProfileContext';
 function Matches() {
   const [listings, setListings] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  //const [favorites, setFavorites] = useState([]);
   const [swipeDirection, setSwipeDirection] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { profile } = useContext(ProfileContext);
 
   const shuffleArray = (array) => {
     const newArray = array.slice();
@@ -25,9 +25,14 @@ function Matches() {
 
   useEffect(() => {
     // Shuffle the listings data before setting it
-    const randomizedListings = shuffleArray(listingsData);
-    setListings(randomizedListings);
-  }, []);
+    let filteredListings = listingsData;
+    if (profile && profile.city) {
+      filteredListings = listingsData.filter(
+        (listing) => listing.city.toLowerCase() === profile.city.toLowerCase()
+      );
+  }
+  setListings(shuffleArray(filteredListings));
+ }, [profile]);
 
 
   useEffect(() => {

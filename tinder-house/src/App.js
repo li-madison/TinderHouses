@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute"
 import {AuthProvider} from './Contexts/authContext'
 import Chatbot from './components/Chatbot'; // Import the Chatbot component
 import { FavoritesProvider } from './Contexts/FavoriteContext'
+import { ProfileProvider } from './Contexts/ProfileContext';
 
 
 
@@ -19,6 +20,7 @@ function App() {
     <AuthProvider>
       <FavoritesProvider>
         <ProfileProvider>
+        
          <div className = "bg-red-200">
     <Router>
       <Navbar/>
