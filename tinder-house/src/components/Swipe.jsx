@@ -4,12 +4,14 @@ import { LuBedDouble, LuToilet } from "react-icons/lu";
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoMdHeartDislike } from "react-icons/io";
 import listingsData from '../Pages/real_estate_houses_with_ids.json'; // update path as needed
+import { useFavorites } from '../Contexts/FavoriteContext'; 
 
 function Matches() {
   const [listings, setListings] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [favorites, setFavorites] = useState([]);
+  //const [favorites, setFavorites] = useState([]);
   const [swipeDirection, setSwipeDirection] = useState(null);
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
   useEffect(() => {
     setListings(listingsData);
@@ -22,7 +24,9 @@ function Matches() {
   const handleYes = () => {
     setSwipeDirection('right');
     setTimeout(() => {
-      setFavorites([...favorites, listings[currentIndex]]);
+      //setFavorites([...favorites, listings[currentIndex]]);
+      addFavorite(listings[currentIndex]);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
       nextCard();
     }, 300);
   };
@@ -31,6 +35,7 @@ function Matches() {
     setSwipeDirection('left');
     setTimeout(() => {
       nextCard();
+      
     }, 300);
   };
 
@@ -43,6 +48,8 @@ function Matches() {
     left: { opacity: 0, x: -300, rotate: -10 },
     right: { opacity: 0, x: 300, rotate: 10 },
   };
+
+  
 
   return (
     <div className="flex flex-col items-center">
@@ -127,7 +134,7 @@ function Matches() {
                 <p>${fav.price}</p>
                 <p>{fav.bedroom_count} bed / {fav.bathroom_count} bath</p>
                 <button
-                  onClick={() => setFavorites(favorites.filter((favorite) => favorite.id !== fav.id))}
+                  onClick={() => removeFavorite(fav.id)}
                   className="absolute top-2 right-2 bg-pink-500 text-white p-2 rounded-full"
                 >
                   <IoMdHeartDislike />

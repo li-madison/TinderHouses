@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import houseData from '../Pages/real_estate_houses_with_ids.json'; // Assuming the path is correct
+import { GiRaccoonHead } from "react-icons/gi";
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,7 @@ const Chatbot = () => {
     setIsOpen(!isOpen);
     if (!isOpen && messages.length === 0) {
       // Initial greeting
-      addMessage("Hello! How can I help you find a house today? Please tell me your budget and preferred weather risk level (e.g., 'low', 'medium', 'high').", 'bot');
+      addMessage("Hello I'm Smokey! How can I help you find a house today? Please tell me your budget and preferred weather risk level (e.g., 'low', 'medium', 'high').", 'bot');
     }
   };
 
@@ -149,7 +150,7 @@ const Chatbot = () => {
 
   return (
     <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}>
-      {/* Chatbot Popup */}
+      
       {isOpen && (
         <div style={{
           width: '300px',
@@ -162,12 +163,12 @@ const Chatbot = () => {
           marginBottom: '10px',
           boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
         }}>
-          {/* Header */}
+       
           <div style={{ padding: '10px', borderBottom: '1px solid #eee', fontWeight: 'bold', textAlign: 'center' }}>
             House Finder Bot
           </div>
 
-          {/* Messages */}
+          
           <div id="chatbot-messages" style={{ flexGrow: 1, overflowY: 'auto', padding: '10px' }}>
             {messages.map((msg, index) => (
               <div key={index} style={{ marginBottom: '10px', textAlign: msg.sender === 'user' ? 'right' : 'left' }}>
@@ -187,7 +188,7 @@ const Chatbot = () => {
             ))}
           </div>
 
-          {/* Input Area */}
+          
           <div style={{ display: 'flex', padding: '10px', borderTop: '1px solid #eee' }}>
             <input
               type="text"
@@ -204,7 +205,7 @@ const Chatbot = () => {
         </div>
       )}
 
-      {/* Toggle Button */}
+
       <button onClick={toggleChatbot} style={{
         width: '60px',
         height: '60px',
@@ -219,7 +220,190 @@ const Chatbot = () => {
         justifyContent: 'center',
         boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
       }}>
-        {isOpen ? 'X' : '💬'}
+        {isOpen ? 'X' : <GiRaccoonHead className="w-[100%] h-[100%]" />}
+      </button>
+    </div>
+  );
+};
+
+export default Chatbot;*/
+
+import React, { useState } from 'react';
+import { FaRobot, FaUser } from 'react-icons/fa6';
+import { useFavorites } from '../Contexts/FavoriteContext';
+import { GiRaccoonHead } from 'react-icons/gi';
+
+const Chatbot = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { favorites } = useFavorites();  // Get favorites from context
+  const [userInput, setUserInput] = useState('');
+  const [greetingSent, setGreetingSent] = useState(false);
+  const [messages, setMessages] = useState([]);
+  
+  const addMessage = (text, sender = 'user') => {
+    setMessages((prev) => [...prev, { sender, text }]);
+  };
+
+  const toggleChatbot = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen && !greetingSent) {
+      // Initial greeting
+      addMessage("Hello, I'm Smokey! How can I help you find a house today?", 'bot');
+      setGreetingSent(true); 
+    }
+  };
+
+  const processUserInput = (favorites) => {
+    // Ensure favorites is an array
+    if (!Array.isArray(favorites)) {
+      console.error('Favorites is not an array:', favorites);
+      favorites = [];
+    }
+
+    let financialRisks = {
+      foundationalIssues: 0,
+      insuranceNeeded: 0,
+      warningMessages: [],
+    };
+
+    favorites.forEach((house) => {
+      const risks = house.weather_risk?.toLowerCase().split(',') || [];
+
+      // Check for foundational issues (high drought + high flood)
+      if (risks.drought_risk === 'High' && risks.coastal_flooding_risk === 'High') {
+        financialRisks.foundationalIssues += 1;
+        financialRisks.warningMessages.push(`${house.street_address} in ${house.city} has both high drought and high flood risks. This could lead to foundational issues.`);
+      }
+
+      // Check if tsunami insurance is needed (high tsunami risk)
+      if (risks.itsunami_risk === 'High') {
+        financialRisks.insuranceNeeded += 1;
+        financialRisks.warningMessages.push(`${house.street_address} in ${house.city} is in a tsunami-prone area. Tsunami insurance is recommended.`);
+      }
+
+      if (risks.tornado_risk === 'High') {
+        financialRisks.insuranceNeeded += 1;
+        financialRisks.warningMessages.push(`${house.street_address} in ${house.city} is in a high tornado risk area. Consider tornado insurance.`);
+      }
+  
+      if (risks.wildfire_risk === 'High') {
+        financialRisks.insuranceNeeded += 1;
+        financialRisks.warningMessages.push(`${house.street_address} in ${house.city} is in a high wildfire risk area. Consider wildfire insurance.`);
+      }
+    });
+
+
+
+    // Return a summary of the analysis
+    if (financialRisks.warningMessages.length > 0) {
+      return {
+        message: `Warning: The following risks have been identified in your favorite houses:\n\n${financialRisks.warningMessages.join('\n')}`,
+        foundationalIssues: financialRisks.foundationalIssues,
+        insuranceNeeded: financialRisks.insuranceNeeded,
+      };
+    } else {
+      return {
+        message: 'All of your favorite houses have manageable weather risks. These would be smart investments.',
+        foundationalIssues: financialRisks.foundationalIssues,
+        insuranceNeeded: financialRisks.insuranceNeeded,
+      };
+    }
+  };
+
+  const handleSend = () => {
+    if (!userInput.trim()) return;
+
+    addMessage(userInput, 'user');
+    
+    if (userInput.toLowerCase().includes('analyze favorites')) {
+      // Analyze favorites if the user asks for it
+      if (!favorites || favorites.length === 0) {
+        addMessage("You don't have any favorite houses yet.", 'bot');
+      } else {
+        const analysis = processUserInput(favorites);
+        addMessage(analysis.message, 'bot');
+      }
+    } else {
+      addMessage("I'm still learning! Try typing 'analyze favorites'.", 'bot');
+    }
+    
+    setUserInput('');
+  };
+
+  return (
+    <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}>
+      {isOpen && (
+        <div style={{
+          width: '300px',
+          height: '400px',
+          border: '1px solid #ccc',
+          borderRadius: '8px',
+          backgroundColor: 'white',
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: '10px',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        }}>
+          <div style={{ padding: '10px', borderBottom: '1px solid #eee', fontWeight: 'bold', textAlign: 'center' }}>
+            House Finder Bot
+          </div>
+
+          <div id="chatbot-messages" style={{ flexGrow: 1, overflowY: 'auto', padding: '10px' }}>
+            {messages.map((msg, index) => (
+              <div key={index} style={{ marginBottom: '10px', textAlign: msg.sender === 'user' ? 'right' : 'left' }}>
+                <span style={{
+                  padding: '8px 12px',
+                  borderRadius: '15px',
+                  backgroundColor: msg.sender === 'user' ? '#4F3527' : '#e9ecef',
+                  color: msg.sender === 'user' ? 'white' : 'black',
+                  display: 'inline-block',
+                  maxWidth: '80%',
+                  whiteSpace: 'pre-wrap', // Allows line breaks
+                  wordWrap: 'break-word'
+                }}>
+                  {msg.text}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: 'flex', padding: '10px', borderTop: '1px solid #eee' }}>
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              style={{ flexGrow: 1, marginRight: '10px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
+              placeholder="Ask about houses..."
+            />
+            <button
+              onClick={handleSend}
+              style={{ padding: '8px 15px', borderRadius: '5px', border: 'none', backgroundColor: '#4F3527', color: 'white', cursor: 'pointer' }}
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={toggleChatbot}
+        style={{
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          backgroundColor: '#4F3527',
+          color: 'white',
+          border: 'none',
+          fontSize: '24px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+        }}
+      >
+        {isOpen ? 'X' : <GiRaccoonHead className="w-[100%] h-[100%]" />}
       </button>
     </div>
   );
