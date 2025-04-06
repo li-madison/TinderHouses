@@ -77,7 +77,7 @@ function Expanded({
             <div className="flex flex-col space-y-2">
               <div className="flex flex-row items-center">
                 <LuBedDouble />
-                <p className="pl-4">{rooms}</p>
+                <p className="pl-4">{rooms} Bedrooms</p>
               </div>
               <div className="flex flex-row items-center">
                 <MdSquareFoot className="w-6 h-6" />
