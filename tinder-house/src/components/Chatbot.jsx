@@ -231,7 +231,7 @@ const Chatbot = () => {
           boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
         }}>
           <div style={{ padding: '10px', borderBottom: '1px solid #eee', fontWeight: 'bold', textAlign: 'center' }}>
-            House Finder Bot
+            House Finder
           </div>
 
           <div id="chatbot-messages" style={{ flexGrow: 1, overflowY: 'auto', padding: '10px' }}>

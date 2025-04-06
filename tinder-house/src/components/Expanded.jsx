@@ -19,6 +19,7 @@ function Expanded({
   bathroomCount, 
   onClose,
   additionalDetails 
+  
 }) {
   // Process risks (excluding coastal flooding and drought)
   const highRisks = risks
@@ -31,6 +32,7 @@ function Expanded({
         )
         .map(([riskName]) => riskName.replace(/_/g, " "))
     : [];
+
 
   return (
     <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row">
@@ -119,7 +121,7 @@ function Expanded({
             onClick={onClose} 
             className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
           >
-            Close
+            close
           </button>
         </div>
       </div>
