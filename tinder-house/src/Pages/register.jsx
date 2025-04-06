@@ -22,7 +22,7 @@ function RegisterPage() {
 
     return (
         <div>
-        <div className="flex flex-col items-center h-screen ">
+        <div className="flex flex-col items-center h-screen bg-[#FAEDE4]">
         
            
             <form onSubmit={handleRegister}  className=" flex flex-col p-6 w-full items-center">
@@ -48,12 +48,14 @@ function RegisterPage() {
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <button
                     type="submit"
-                    className = " text-center border rounded-xl border-darkBlue w-56 mx-auto p-2 m-4 bg-darkBlue text-white hover:text-darkBlue hover:bg-white hover:border-darkBlue " > 
+                    className="text-center border rounded-xl border-darkBlue w-56 mx-auto p-2 m-4 bg-[#c27b7b] text-white hover:bg-white hover:text-[#c27b7b] hover:border-[#c27b7b]"
+                    >
                     Register
                 </button>
+
             </form>
             <div className=" flex flex-col text-center text-xs">
-            <p className="mb-3 text-darkBlue hover:underline hover:underline-offset-2">
+            <p className="mb-3 text-darkBlue hover:underline hover:underline-offset-2 ">
                         Already have an account?{' '}
                 <Link to="/login" className="">Login here</Link>
             </p>
