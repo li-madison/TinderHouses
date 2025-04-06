@@ -29,7 +29,7 @@ function LoginPage() {
 
   return (
     <div>
-        <div className="flex flex-col items-center  h-screen">
+        <div className="flex flex-col items-center  h-screen bg-[#FAEDE4]">
             <form  onSubmit={handleSubmit} className=" flex flex-col p-6 w-full items-center">
                 <p className = "poppins-medium text-darkBlue pt-5 text-xl ">Sign in to start planning!</p>
                 <input 
@@ -53,7 +53,7 @@ function LoginPage() {
                 {error && <p className="text-red-500 text-sm">{error}</p>}
                 <button
                     type="submit"
-                    className = " text-center border rounded-xl border-darkBlue w-56 mx-auto p-2 m-4 bg-darkBlue text-white hover:text-darkBlue hover:bg-white hover:border-darkBlue " > 
+                    className = " text-center border rounded-xl  w-56 mx-auto p-2 m-4 bg-[#c27b7b] text-white hover:bg-white hover:text-[#c27b7b] hover:border-[#c27b7b]" > 
                     Sign in 
                 </button>
                 <div  className = " flex flex-col items-center text-xs">

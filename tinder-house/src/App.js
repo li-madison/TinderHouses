@@ -10,12 +10,14 @@ import Register from './Pages/register'
 import PrivateRoute from "./components/PrivateRoute"
 import {AuthProvider} from './Contexts/authContext'
 import Chatbot from './components/Chatbot'; // Import the Chatbot component
+import { FavoritesProvider } from './Contexts/FavoriteContext'
 
 
 
 function App() {
   return (
     <AuthProvider>
+      <FavoritesProvider>
          <div className = "bg-red-200">
     <Router>
       <Navbar/>
@@ -31,6 +33,7 @@ function App() {
     </Router>
     <Chatbot /> {/* Add the Chatbot component here */}
   </div> 
+  </FavoritesProvider>
     </AuthProvider>
    
   );
