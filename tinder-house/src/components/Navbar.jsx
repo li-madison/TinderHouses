@@ -4,18 +4,16 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div> 
-    <div className = "flex flex-row justify-between items-center px-20 py-4 bg-lightBlue">
-        <div className='text-darkBlue text-3xl poppins-bold'>Tinder Houses</div>
-        <div className = "flex flex-row gap-8 poppins-medium "> 
-            <Link to = "/" className = " hover:text-blue1 transition duration-300"> Home </Link>
-            <Link to = "/finance" className = " hover:text-blue1 transition duration-300"> Financial Planning</Link>
-            <Link to = "/houses" className = " hover:text-blue1 transition duration-300"> Explore Houses</Link>
-        </div>
-        <Link to ="/Profile"><VscAccount className = "hover:text-blue1 transition duration-300" size = "2rem"/></Link>
-  </div>
-  <hr className = "w-full border-t-2 border-darkBlue border-opacity-50"/>
-  </div>
+    
+    <div className = "flex flex-row justify-between items-center px-20 py-4 bg-[#f9dac4]">
+      <Link to ="/" className=" justify-start text-stone-900 text-2xl font-extrabold font-['Montserrat']">miCasa</Link>
+ 
+    
+    <Link to ="/houses" className=" text-stone-900 text-lg font-bold font-['Montserrat']">Finder</Link>
+    <Link to ="/finance" className=" text-stone-900 text-lg font-bold font-['Montserrat']">Finances</Link>
+    <Link to ="/Profile"><VscAccount className = " text-stone-900 transition duration-300" size = "2rem"/></Link>
+    </div>
+  
   );
 }
 

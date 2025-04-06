@@ -24,6 +24,9 @@ function Houses() {
           <p>Price: ${listing.price}</p>
           <p>Bedrooms: {listing.bedrooms}</p>
           <p>Bathrooms: {listing.bathrooms}</p>
+          <p>Down Payment: ${listing.down_payment_requirement}</p>
+          <p>State: {listing.state}</p>
+          
         </div>
       ))}
     </div>

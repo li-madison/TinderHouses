@@ -15,7 +15,7 @@ import {AuthProvider} from './Contexts/authContext'
 function App() {
   return (
     <AuthProvider>
-         <div className = "bg-white">
+         <div className = "bg-red-200">
     <Router>
       <Navbar/>
       <Routes>
