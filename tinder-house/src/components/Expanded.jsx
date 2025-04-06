@@ -3,6 +3,7 @@ import React from 'react';
 import { LuBedDouble, LuToilet } from 'react-icons/lu';
 import { MdSquareFoot } from "react-icons/md";
 import { FiMapPin } from 'react-icons/fi';
+import { FaExclamationTriangle } from "react-icons/fa";
 
 function Expanded({ 
   image, 
@@ -97,8 +98,8 @@ function Expanded({
             <h3 className="text-lg font-bold text-[#2B1B12] mb-2">Risks</h3>
             {/* Display a combined sentence for high risks */}
             {highRisks.length > 0 && (
-              <p className="text-base text-stone-700 mt-2">
-                My data shows me that this area is prone to severe {highRisks.join(" and ")}, which can increase insurance rates.
+              <p className="text-base text-stone-700 mt-2 flex flex-row">
+               <FaExclamationTriangle className="w-[10%] h-[10%] mx-3"/> This area is prone to severe {highRisks.join(" and ")}, which can increase insurance rates.
               </p>
             )}
             {(risks.coastal_flooding_risk === "High" || risks.coastal_flooding_risk === "Moderate") &&
