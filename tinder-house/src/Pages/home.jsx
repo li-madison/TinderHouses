@@ -1,15 +1,15 @@
-// Home.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import listingsData from './real_estate_houses_with_ids.json';
-import Card from '../components/Card';
+import listingsData from './real_estate_houses_with_ids.json'; // adjust the path if needed
+import Card from '../components/Card'; // make sure this path is correct
+import Expanded from '../components/Expanded'; 
 
 function Home() {
   const [offers, setOffers] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [expandedOffer, setExpandedOffer] = useState(null);
 
   useEffect(() => {
-    // Take the first three items from the listings
+    // Assuming listingsData is an array, take the first three items
     const threeOffers = listingsData.slice(0, 3);
     setOffers(threeOffers);
   }, []);
@@ -21,8 +21,8 @@ function Home() {
         <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
           Find Your <br className="lg:hidden" /> Dream Home
         </div>
-        <div className="text-lg text-[#2B1B12] font-montserrat text-center">
-          Explore the best offers in your area
+        <div className="text-lg font-bold text-[#4F3527] max-w-xl text-center">
+          blahblahblah<br />-<br />-<br />-
         </div>
         <Link
           to="/register"
@@ -31,21 +31,25 @@ function Home() {
           Sign up
         </Link>
       </div>
+
+      {/* Section Title */}
+      <h2 className="text-4xl text-center font-extrabold text-[#2B1B12] font-montserrat">
+        Popular Offers
+      </h2>
+
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {offers.map((offer, index) => (
           <Card
             key={offer.id || index}
-            image={offer.img}
+            image={offer.img} // ensure your JSON file has an "img" field or adjust accordingly
             city={offer.city}
             price={`$${offer.price}`}
-            rooms={`${offer.bedroom_count}`}
+            rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
+            
             actionButton={
-              <button
-                onClick={() => setModalOpen(true)}
-                className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
-              >
+              <button className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg">
                 More
               </button>
             }
@@ -53,9 +57,8 @@ function Home() {
         ))}
       </div>
 
-      
-      {/* Expanded Component */}
-      {expandedOffer && (
+       {/* Expanded Component */}
+       {expandedOffer && (
         <Expanded
           image={expandedOffer.img}
           city={expandedOffer.city}
