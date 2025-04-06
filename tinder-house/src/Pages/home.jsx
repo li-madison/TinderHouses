@@ -22,7 +22,7 @@ function Home() {
     <div className="min-h-screenflex flex-col space-y-10" style={{backgroundColor: "#fef7f2"}}>
       {/* Header Section */}
       
-      <section className="flex flex-col items-center space-y-4 lg:space-y-8 px-16 pt-16 lg:flex-row lg:items-center justify-between h-64">
+      <section className="flex flex-col items-center space-y-4 lg:space-y-8 px-16 pt-20 lg:flex-row lg:items-center justify-between h-64">
 
           <div className="text-5xl font-bold justify-start text-[#2B1B12] font-montserrat pt-4 ">
             Find Your <br /> 
@@ -35,7 +35,7 @@ function Home() {
       <div className="flex justify-start px-16 py-16 items-center">
         <Link
           to="/register"
-          className="bg-[#2B1B12] text-white font-semibold text-lg px-12  mx-4 py-3 rounded-lg mt-4 lg:mt-0"
+          className="bg-[#2B1B12] text-white font-semibold text-lg px-12 mx-4 py-3 rounded-lg mt-4 lg:mt-0"
         >
           Sign up
         </Link>

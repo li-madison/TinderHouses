@@ -8,7 +8,9 @@ function Navbar() {
     <div className="flex flex-row items-center px-16 py-4 justify-between bg-[#f9dac4]">
 
       <div>
-        <Link to="/" className="text-stone-900 text-2xl font-extrabold"> miCasa </Link>
+        <Link to="/">
+          <img src={"/Remove background project.png"} alt=" " className="w-full h-full"></img>
+        </Link>
       </div>
 
       <div className="flex flex-row ml-auto space-x-6 px-16">
