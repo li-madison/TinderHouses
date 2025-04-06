@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import houseData from '../real_estate_houses.json'; // Assuming the path is correct
+import houseData from '../Pages/real_estate_houses_with_ids.json'; // Assuming the path is correct
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
