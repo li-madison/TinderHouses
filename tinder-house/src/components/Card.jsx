@@ -2,6 +2,7 @@
 import React from 'react';
 import { LuBedDouble } from 'react-icons/lu';
 import { MdSquareFoot } from "react-icons/md";
+import { HiMiniMapPin } from "react-icons/hi2";
 import { FiMapPin } from 'react-icons/fi';
 
 function Card({ 
@@ -15,7 +16,7 @@ function Card({
   actionButton 
 }) {
   return (
-    <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col">
+    <div className="bg-[#DDC7BB] rounded-2xl shadow-md overflow-hidden flex flex-col">
       <img src={image} alt={city} className="w-full h-64 object-cover" />
       <div className="p-4 space-y-2">
         <div className="flex items-center space-x-2">

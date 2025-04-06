@@ -35,7 +35,7 @@ function Expanded({
 
 
   return (
-    <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row">
+    <div className="bg-[#DDC7BB] rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row">
       {/* Image Column: less than half (1/3 of width) */}
       <div className="md:w-1/3">
         <img 

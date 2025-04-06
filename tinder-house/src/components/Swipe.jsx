@@ -90,7 +90,7 @@ function Matches() {
             animate={{ opacity: 1, y: 0 }}
             exit={exitAnimation[swipeDirection] || { opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-stone-300 w-[90%] md:w-[50%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
+            className="bg-[#DDC7BB] w-[90%] md:w-[50%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
           >
             <div className="flex flex-col space-x-2">
               <img
@@ -183,7 +183,7 @@ function Matches() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-stone-200 rounded-xl shadow-md p-4 relative"
+                className="bg-[#DDC7BB] rounded-xl shadow-md p-4 relative"
               >
                 <img src={fav.img} alt="house" className="rounded-lg h-40 w-full object-cover mb-3" />
                 <div className = "flex flex-row justify-between">
@@ -191,7 +191,7 @@ function Matches() {
                 <p> {fav.id} </p>
                 </div>
                
-                <p>${fav.price}</p>
+                <p>${Number(fav.price).toLocaleString()}</p>
                 <p>{fav.bedroom_count} bed / {fav.bathroom_count} bath</p>
                 <button
                   onClick={() => removeFavorite(fav.id)}
