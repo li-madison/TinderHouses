@@ -53,20 +53,30 @@ function Home() {
         ))}
       </div>
 
-      {/* General Popup Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4">General Popup</h2>
-            <p>This is a general popup triggered by clicking the More button.</p>
-            <button
-              onClick={() => setModalOpen(false)}
-              className="mt-4 bg-[#2B1B12] text-white font-semibold px-4 py-2 rounded-lg"
+      
+      {/* Expanded Component */}
+      {expandedOffer && (
+        <Expanded
+          image={expandedOffer.img}
+          city={expandedOffer.city}
+          price={expandedOffer.price}
+          rooms={expandedOffer.bedroom_count}
+          size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+          address={expandedOffer.street_address}
+          downPayment={expandedOffer.down_payment_required}
+          state={expandedOffer.state}
+          zipCode={expandedOffer.zip_code}
+          bathroomCount={expandedOffer.bathroom_count}
+          risks={expandedOffer.risks}
+          actionButton={
+            <button 
+              onClick={() => setExpandedOffer(null)}
+              className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
             >
               Close
             </button>
-          </div>
-        </div>
+          }
+        />
       )}
     </div>
   );
