@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json';
 import Card from '../components/Card';
+import Expanded from '../components/Expanded';
 
 function Home() {
   const [offers, setOffers] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [expandedOffer, setExpandedOffer] = useState(null);
 
   useEffect(() => {
     // Take the first three items from the listings
@@ -43,7 +44,7 @@ function Home() {
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={
               <button
-                onClick={() => setModalOpen(true)}
+                onClick={() => setExpandedOffer(offer)}
                 className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
               >
                 More
@@ -52,31 +53,34 @@ function Home() {
           />
         ))}
       </div>
-
       
-      {/* Expanded Component */}
+      {/* Expanded Component Popup */}
       {expandedOffer && (
-        <Expanded
-          image={expandedOffer.img}
-          city={expandedOffer.city}
-          price={expandedOffer.price}
-          rooms={expandedOffer.bedroom_count}
-          size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
-          address={expandedOffer.street_address}
-          downPayment={expandedOffer.down_payment_required}
-          state={expandedOffer.state}
-          zipCode={expandedOffer.zip_code}
-          bathroomCount={expandedOffer.bathroom_count}
-          risks={expandedOffer.risks}
-          actionButton={
-            <button 
-              onClick={() => setExpandedOffer(null)}
-              className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          }
-        />
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <Expanded
+              image={expandedOffer.img}
+              city={expandedOffer.city}
+              price={expandedOffer.price}
+              rooms={expandedOffer.bedroom_count}
+              size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+              address={expandedOffer.street_address}
+              downPayment={expandedOffer.down_payment_required}
+              state={expandedOffer.state}
+              zipCode={expandedOffer.zip_code}
+              bathroomCount={expandedOffer.bathroom_count}
+              risks={expandedOffer.risks}
+              actionButton={
+                <button 
+                  onClick={() => setExpandedOffer(null)}
+                  className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
+                >
+                  Close
+                </button>
+              }
+            />
+          </div>
+        </div>
       )}
     </div>
   );
