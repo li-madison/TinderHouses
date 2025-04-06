@@ -3,7 +3,7 @@ import React from 'react';
 
 function Card({ 
   image, 
-  title, 
+  city, 
   price, 
   rooms, 
   size, 
@@ -13,11 +13,11 @@ function Card({
 }) {
   return (
     <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col">
-      <img src={image} alt={title} className="w-full h-64 object-cover" />
+      <img src={image} alt={city} className="w-full h-64 object-cover" />
       <div className="p-4 space-y-2">
         <div className="flex items-center space-x-2">
           <img src="https://placehold.co/24x24" alt="" className="w-6 h-6" />
-          <span className="text-xl font-bold text-[#2B1B12]">{title}</span>
+          <span className="text-xl font-bold text-[#2B1B12]">{city}</span>
         </div>
         {rooms && size && (
           <div className="flex items-center space-x-4 text-[#4F3527] text-lg font-semibold">
