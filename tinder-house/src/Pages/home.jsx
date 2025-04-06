@@ -41,13 +41,14 @@ function Home() {
           <Card
             key={offer.id || index}
             image={offer.img} // ensure your JSON file has an "img" field or adjust accordingly
-            title={offer.title}
+            city={offer.city}
             price={`$${offer.price}`}
             rooms={`${offer.bedroom_count} Rooms`}
-            size={`${offer.size ? offer.size : 'N/A'}`}
+            size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
+            
             actionButton={
               <button className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg">
-                Sign up
+                More
               </button>
             }
           />
