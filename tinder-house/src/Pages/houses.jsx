@@ -71,7 +71,7 @@ import listingsData from './real_estate_houses_with_ids.json'; // make sure the 
 function Houses() {
   return (
     <div className="min-h-screen bg-[#f4f1ee] p-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-[#4f3527]">Explore Houses</h1>
+      <h1 className="text-5xl pt-16 font-bold text-center mb-8 text-[#4f3527]">Explore Houses</h1>
       <Swipe listings={listingsData} />
     </div>
   );
