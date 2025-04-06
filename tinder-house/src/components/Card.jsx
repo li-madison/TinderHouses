@@ -1,5 +1,8 @@
 // Card.jsx
 import React from 'react';
+import { LuBedDouble } from 'react-icons/lu';
+import { MdSquareFoot } from "react-icons/md";
+import { FiMapPin } from 'react-icons/fi';
 
 function Card({ 
   image, 
@@ -16,18 +19,18 @@ function Card({
       <img src={image} alt={city} className="w-full h-64 object-cover" />
       <div className="p-4 space-y-2">
         <div className="flex items-center space-x-2">
-          <img src="https://placehold.co/24x24" alt="" className="w-6 h-6" />
+          <FiMapPin className="w-6 h-6" />
           <span className="text-xl font-bold text-[#2B1B12]">{city}</span>
         </div>
         {rooms && size && (
-          <div className="flex items-center space-x-4 text-[#4F3527] text-lg font-semibold">
-            <div className="flex items-center space-x-1">
-              <img src="https://placehold.co/24x24" alt="" className="w-6 h-6 bg-white rounded" />
-              <span>{rooms}</span>
+          <div className="pt-2 pb-2 text-xl">
+            <div className="flex flex-row items-center">
+              <LuBedDouble />
+              <p className="pl-4">{rooms}</p>
             </div>
-            <div className="flex items-center space-x-1">
-              <img src="https://placehold.co/24x24" alt="" className="w-6 h-6 bg-white rounded" />
-              <span>{size}</span>
+            <div className="flex flex-row items-center">
+              <MdSquareFoot className="w-6 h-6" />
+              <p className="pl-4">{size}</p>
             </div>
           </div>
         )}
