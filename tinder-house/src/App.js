@@ -9,6 +9,7 @@ import Login from './Pages/login'
 import Register from './Pages/register'
 import PrivateRoute from "./components/PrivateRoute"
 import {AuthProvider} from './Contexts/authContext'
+import Chatbot from './components/Chatbot'; // Import the Chatbot component
 
 
 
