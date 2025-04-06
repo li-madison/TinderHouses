@@ -6,6 +6,7 @@ import { IoMdHeartDislike } from "react-icons/io";
 import listingsData from '../Pages/real_estate_houses_with_ids.json'; // update path as needed
 import { useFavorites } from '../Contexts/FavoriteContext'; 
 import { ProfileContext } from '../Contexts/ProfileContext';
+import Expanded from '../components/Expanded';
 
 function Matches() {
   const [listings, setListings] = useState([]);
@@ -13,6 +14,7 @@ function Matches() {
   const [swipeDirection, setSwipeDirection] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
   const { profile } = useContext(ProfileContext);
+  const [expandedOffer, setExpandedOffer] = useState(null);
 
   const shuffleArray = (array) => {
     const newArray = array.slice();
@@ -94,12 +96,17 @@ function Matches() {
 
               <div className="pl-4">
                 <div className="flex flex-row justify-between items-center pr-8">
-                  <p className="text-[#4f3527] font-bold text-xl ">
-                    ${listings[currentIndex].price}
-                  </p>
-                  <div className="bg-[#2b1b12] text-white font-semibold text-lg px-3 py-1 rounded-lg self-start">
-                    More
-                  </div>
+                <p className="text-[#4f3527] font-bold text-xl ">
+                    ${Number(listings[currentIndex].price).toLocaleString()}
+                </p>
+
+                <div
+                  onClick={() => setExpandedOffer(listings[currentIndex])}
+                  className="bg-[#2b1b12] text-white font-semibold text-lg px-3 py-1 rounded-lg self-start cursor-pointer"
+                  >
+                  More
+                </div>
+
                 </div>
                 <div className="flex flex-row justify-between pr-8">
                   <div className="pt-2 pb-2 text-xl">
@@ -132,6 +139,28 @@ function Matches() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Add this modal block (e.g., at the bottom of the return, before Favorites Section) */}
+        {expandedOffer && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded-lg w-2/3">
+              <Expanded
+                image={expandedOffer.img}
+                city={expandedOffer.city}
+                price={expandedOffer.price}
+                rooms={expandedOffer.bedroom_count}
+                size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+                address={expandedOffer.street_address}
+                downPayment={expandedOffer.down_payment_required}
+                state={expandedOffer.state}
+                zipCode={expandedOffer.zip_code}
+                bathroomCount={expandedOffer.bathroom_count}
+                risks={expandedOffer.risks}
+                onClose={() => setExpandedOffer(null)}
+              />
+            </div>
+          </div>
+        )}
 
       {/* Favorites Section */}
       {favorites.length > 0 && (
