@@ -41,14 +41,14 @@ function Home() {
         Popular Offers
       </h2>
 
-      {/* Cards Grid */}
+      {/* Cards Grid */}  
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-8 gap-6 mt-10">
         {offers.map((offer, index) => (
           <Card
             key={offer.id || index}
             image={offer.img}
             city={offer.city}
-            price={`$${offer.price}`}
+            price={`${Number(offer.price).toLocaleString()}`}
             rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={
