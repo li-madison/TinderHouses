@@ -192,6 +192,15 @@ function Matches() {
                 </div>
                
                 <p>${Number(fav.price).toLocaleString()}</p>
+                <div className="flex justify-between items-center mt-2">
+                <button 
+                  onClick={() => setExpandedOffer(fav)}
+                  className="absolute bottom-2 right-2 bg-[#2B1B12] text-white text-sm font-semibold px-3 py-1 rounded-lg"
+                >More
+                </button>
+
+                </div>
+
                 <p>{fav.bedroom_count} bed / {fav.bathroom_count} bath</p>
                 <button
                   onClick={() => removeFavorite(fav.id)}
