@@ -18,11 +18,14 @@ const Chatbot = () => {
   };
 
   const toggleChatbot = () => {
+
+
+    
     setIsOpen(!isOpen);
     if (!isOpen && !greetingSent) {
-      // Initial greeting
-      addMessage("Hello, I'm Smokey! How can I help you find a house today?", 'bot');
-      addMessage("ex. analyze favorites, calculate mortgage payment (house_#), show house details (house_#)", 'bot');
+   
+      addMessage("Prompts you can input: ", 'bot');
+      addMessage("analyze favorites, calculate mortgage payment (house_#), show house details (house_#)", 'bot');
       setGreetingSent(true); 
     }
   };
