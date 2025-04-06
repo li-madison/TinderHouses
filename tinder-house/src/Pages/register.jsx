@@ -14,7 +14,7 @@ function RegisterPage() {
         e.preventDefault();
         try {
             await register(email, password);
-            navigate('/'); 
+            navigate('/profile'); 
         } catch (error) {
             setError('This email is already registered. Please use a different email.');
         }

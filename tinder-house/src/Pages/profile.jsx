@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase/firebase';
 import { signOut } from "firebase/auth";
 import { db, setDoc, doc, getDoc } from '../firebase/firebase';
@@ -75,7 +75,8 @@ const saveProfile = async () => {
         <h1 className="font-bold text-3xl ">Profile</h1>
         <button
         type="submit"
-        className = " p-2 text-center border rounded-xl md:w-40 mx-auto bg-[#c27b7b] text-white hover:text-black hover:bg-white hover:border-darkBlue " > 
+        className = " p-2 text-center border rounded-xl md:w-40 mx-auto bg-[#c27b7b] text-white hover:text-black hover:bg-white hover:border-darkBlue " >
+           
         Log Out
         </button>
          
@@ -86,6 +87,7 @@ const saveProfile = async () => {
             type="text"
             className="bg-white pl-4"
             name="name"
+            placeholder="name"
             value={profile.name}
             onChange={handleInputChange}
             disabled={!isEditing}
@@ -95,6 +97,7 @@ const saveProfile = async () => {
           <input
             type="email"
             name="email"
+            placeholder="email"
             className="bg-white pl-4 text-[#2d2c2c] underline"
             value={profile.email}
             onChange={handleInputChange}
@@ -105,6 +108,7 @@ const saveProfile = async () => {
           <input
             type="text"
             name="phone"
+            placeholder="phone number"
             className="bg-white pl-4"
             value={profile.phone}
             onChange={handleInputChange}
@@ -191,7 +195,7 @@ const saveProfile = async () => {
       {/* Save or Edit button */}
       <div className=" border my-8 p-2 bg-[#c27b7b] hover:bg-white hover:text-[#c27b7b] hover:border-[#c27b7b] rounded-xl text-white text-center">
         {isEditing ? (
-          <button onClick={saveProfile}>Save</button>
+          <Link to="/" onClick={saveProfile}>Save</Link>
         ) : (
           <button onClick={() => setIsEditing(true)}>Edit</button>
         )}
