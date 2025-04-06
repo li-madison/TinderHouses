@@ -18,6 +18,7 @@ function App() {
   return (
     <AuthProvider>
       <FavoritesProvider>
+        <ProfileProvider>
          <div className = "bg-red-200">
     <Router>
       <Navbar/>
@@ -33,8 +34,10 @@ function App() {
     </Router>
     <Chatbot /> {/* Add the Chatbot component here */}
   </div> 
+  </ProfileProvider>
   </FavoritesProvider>
     </AuthProvider>
+    
    
   );
 }

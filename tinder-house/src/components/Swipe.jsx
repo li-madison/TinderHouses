@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { IoMdHeartDislike } from "react-icons/io";
 import listingsData from '../Pages/real_estate_houses_with_ids.json'; // update path as needed
 import { useFavorites } from '../Contexts/FavoriteContext'; 
+import { ProfileContext } from '../Contexts/ProfileContext';
 
 function Matches() {
   const [listings, setListings] = useState([]);
@@ -13,9 +14,21 @@ function Matches() {
   const [swipeDirection, setSwipeDirection] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
+  const shuffleArray = (array) => {
+    const newArray = array.slice();
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
   useEffect(() => {
-    setListings(listingsData);
+    // Shuffle the listings data before setting it
+    const randomizedListings = shuffleArray(listingsData);
+    setListings(randomizedListings);
   }, []);
+
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -130,7 +143,11 @@ function Matches() {
                 className="bg-stone-200 rounded-xl shadow-md p-4 relative"
               >
                 <img src={fav.img} alt="house" className="rounded-lg h-40 w-full object-cover mb-3" />
+                <div className = "flex flex-row justify-between">
                 <p className="font-bold">{fav.street_address}, {fav.city}, {fav.state}</p>
+                <p> {fav.id} </p>
+                </div>
+               
                 <p>${fav.price}</p>
                 <p>{fav.bedroom_count} bed / {fav.bathroom_count} bath</p>
                 <button

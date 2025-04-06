@@ -252,7 +252,70 @@ const Chatbot = () => {
       setGreetingSent(true); 
     }
   };
+  const calculateMortgagePayment = (price, downPayment, interestRate, loanTerm) => {
+    const principal = price - downPayment;
+    const monthlyInterestRate = (interestRate / 100) / 12;
+    const numberOfPayments = loanTerm * 12;
+  
+    // Mortgage formula
+    const monthlyPayment = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+                           (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+  
+    return monthlyPayment.toFixed(2); // Return the result as a string with 2 decimal places
+  };
 
+  const getMortgageForHouse = (id) => {
+    const house = favorites.find(house => house.id === id);
+    
+    if (!house) {
+      return `House with ID ${id} not found in your favorites.`;
+    }
+  
+    const { price, down_payment_required, risks } = house;
+    const interestRate = 3.5; // Example fixed rate
+    const loanTerm = 30; // Example loan term in years
+  
+    const mortgagePayment = calculateMortgagePayment(price, down_payment_required, interestRate, loanTerm);
+  
+    return `The monthly mortgage payment for ${house.street_address} in ${house.city} is approximately $${mortgagePayment}.`;
+  };
+
+  const getRiskForHouse = (id) => {
+    const house = favorites.find(house => house.id === id);
+    
+    if (!house) {
+      return `House with ID ${id} not found in your favorites.`;
+    }
+  
+    const { risks } = house;
+    const riskMessages = Object.entries(risks)
+      .map(([risk, level]) => `${risk.replace('_', ' ')}: ${level}`)
+      .join('\n');
+  
+    return `Here are the risk levels for ${house.street_address} in ${house.city}:\n\n${riskMessages}`;
+  };
+
+  const getHouseDetails = (id) => {
+    const house = favorites.find(house => house.id === id);
+    
+    if (!house) {
+      return `House with ID ${id} not found in your favorites.`;
+    }
+  
+    const { price, down_payment_required, city, street_address, bathroom_count, bedroom_count, sq_ft, img } = house;
+  
+    return `
+      Here are the details for ${street_address} in ${city}:
+  
+      - Price: $${price.toLocaleString()}
+      - Down Payment: $${down_payment_required.toLocaleString()}
+      - Bathrooms: ${bathroom_count}
+      - Bedrooms: ${bedroom_count}
+      - Square Feet: ${sq_ft}
+
+    `;
+  };
+  
   const processUserInput = (favorites) => {
     // Ensure favorites is an array
     if (!Array.isArray(favorites)) {
@@ -267,7 +330,7 @@ const Chatbot = () => {
     };
 
     favorites.forEach((house) => {
-      const risks = house.weather_risk?.toLowerCase().split(',') || [];
+      const risks =  house.risks;
 
       // Check for foundational issues (high drought + high flood)
       if (risks.drought_risk === 'High' && risks.coastal_flooding_risk === 'High') {
@@ -317,17 +380,31 @@ const Chatbot = () => {
     
     if (userInput.toLowerCase().includes('analyze favorites')) {
       // Analyze favorites if the user asks for it
-      if (!favorites || favorites.length === 0) {
-        addMessage("You don't have any favorite houses yet.", 'bot');
-      } else {
         const analysis = processUserInput(favorites);
         addMessage(analysis.message, 'bot');
       }
+    else if (userInput.toLowerCase().includes('mortgage payment')) {
+      const houseId = extractHouseId(userInput); // Extract ID from user input (e.g., "mortgage payment for house_2")
+      const response = getMortgageForHouse(houseId);
+      addMessage(response, 'bot');
+    } else if (userInput.toLowerCase().includes('risk level')) {
+      const houseId = extractHouseId(userInput); // Extract ID from user input (e.g., "risk level for house_2")
+      const response = getRiskForHouse(houseId);
+      addMessage(response, 'bot');
+    } else if (userInput.toLowerCase().includes('details')) {
+      const houseId = extractHouseId(userInput); // Extract ID from user input (e.g., "details for house_2")
+      const response = getHouseDetails(houseId);
+      addMessage(response, 'bot');
     } else {
-      addMessage("I'm still learning! Try typing 'analyze favorites'.", 'bot');
+      addMessage("I'm still learning! Try asking about mortgage payment, risk level, or house details.", 'bot');
     }
-    
+  
     setUserInput('');
+  };
+
+  const extractHouseId = (input) => {
+    const match = input.match(/house_\d+/); // Simple regex to match house IDs (e.g., house_2)
+    return match ? match[0] : null;
   };
 
   const logFavorites = (favorites) => {
@@ -357,7 +434,7 @@ const Chatbot = () => {
     <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}>
       {isOpen && (
         <div style={{
-          width: '300px',
+          width: '400px',
           height: '400px',
           border: '1px solid #ccc',
           borderRadius: '8px',
