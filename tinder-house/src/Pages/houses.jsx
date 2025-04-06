@@ -16,7 +16,7 @@ function Matches() {
     {listings.map((listing) => (
       <div
         key={listing.id}
-      className="bg-stone-300 w-[60%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
+      className="bg-stone-300 w-[50%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
       >
         <div className="flex flex-col space-x-2">
           <img src={listing.img} alt="" className="w-30 h-30 object-cover rounded-sm mb-4 p-4 " />
@@ -38,7 +38,7 @@ function Matches() {
         <LuToilet className="" /><p className="pl-4">{listing.bathroom_count} Bathrooms</p>
         </div>
         </div>
-         <div  className="bg-[#2b1b12] text-white font-semibold text-lg px-3 py-1 mr-8 mt-2 rounded-lg self-start lg:self-auto">
+         <div  className="bg-[#2b1b12] text-white font-semibold text-lg px-3 py-1 mr-8 mt-2 rounded-lg self-start ">
               More
             </div>
           
@@ -46,12 +46,12 @@ function Matches() {
         
         </div>
         <div className= "flex justify-between items-center">
-        <div className="p-4 bg-red-600 rounded-full shadow-xl flex justify-center items-center mb-4 ml-8 mt-2">
+        <button className="p-4 bg-red-600 rounded-full shadow-xl flex justify-center items-center mb-4 ml-8 mt-2">
                <FaXmark className="text-white text-xl" />
-           </div>
-           <div className="p-4 mr-8 bg-green-600 rounded-full shadow-xl flex justify-center items-center">
+           </button>
+           <button className="p-4 mr-8 bg-green-600 rounded-full shadow-xl flex justify-center items-center">
                <FaRegHeart className="text-white text-xl" />
-           </div>
+           </button>
            </div>
 
         </div>
