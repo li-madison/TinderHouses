@@ -16,12 +16,12 @@ function Navbar() {
           <Link to="/houses" className="text-stone-900 text-lg font-bold hover:shadow-lg transition-shadow duration-300 p-2 rounded"> Matches </Link>
         </div>
         <div>
-          <Link to="/finance" className="text-stone-900 text-lg font-bold hover:shadow-lg transition-shadow duration-300 p-2 rounded"> Help </Link>
+          <Link to="/finance" className="text-stone-900 text-lg font-bold hover:shadow-lg transition-shadow duration-300 p-2 rounded">Advice </Link>
         </div>
       </div>
 
       <div>
-        <Link to="/profile"> <VscAccount className="text-stone-900 transition duration-300 hover:text-blue-500" size="2rem"/></Link>
+        <Link to="/profile"> <VscAccount className="text-stone-900 transition duration-300 hover:text-[#d49c74]" size="2rem"/></Link>
       </div>
     </div>
   );
