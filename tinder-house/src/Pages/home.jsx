@@ -1,3 +1,4 @@
+// Home.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json';
@@ -15,36 +16,39 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FEF7F2] flex flex-col p-6 space-y-10">
+    <div className="min-h-screenflex flex-col space-y-10" style={{backgroundColor: "#fef7f2"}}>
       {/* Header Section */}
-      <div className="flex flex-col items-center space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between">
-        <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
-          Find Your <br className="lg:hidden" /> Dream Home
+      <section className="flex flex-col items-center space-y-4 lg:space-y-8 px-16 pt-16 lg:flex-row lg:items-center justify-between h-64">
+          <div className="text-5xl font-bold justify-start text-[#2B1B12] font-montserrat">Find Your<br />
+          <div className="text-7xl text-[#2B1B12] pt-4 px-0 font-montserrat text-start">Dream Home</div> <br />
+          <div className="text-lg text-[#2B1B12] font-montserrat px-0 text-start">Explore the best offers in your area</div>
         </div>
-        <div className="text-lg text-[#2B1B12] font-montserrat text-center">
-          Explore the best offers in your area
-        </div>
+      </section>
+
+      <div className="flex justify-start px-16 py-16 items-center">
         <Link
           to="/register"
-          className="bg-[#2B1B12] text-white font-semibold text-lg px-6 py-3 rounded-lg mt-4 lg:mt-0"
+          className="bg-[#2B1B12] text-white font-semibold text-lg px-12 py-3 rounded-lg mt-4 lg:mt-0"
         >
           Sign up
         </Link>
       </div>
 
+
       {/* Section Title */}
+      <section className="py-8 px- 32" style={{backgroundColor: "white"}}>
       <h2 className="text-4xl text-center font-extrabold text-[#2B1B12] font-montserrat">
         Popular Offers
       </h2>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-8 gap-6 mt-10">
         {offers.map((offer, index) => (
           <Card
             key={offer.id || index}
             image={offer.img}
             city={offer.city}
-            price={Number(offer.price).toLocaleString()}
+            price={`$${offer.price}`}
             rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={
@@ -58,6 +62,7 @@ function Home() {
           />
         ))}
       </div>
+      </section>
 
       {/* Expanded Component Popup */}
       {expandedOffer && (
@@ -67,7 +72,7 @@ function Home() {
               image={expandedOffer.img}
               city={expandedOffer.city}
               price={expandedOffer.price}
-              rooms={`${expandedOffer.bedroom_count} Rooms`}
+              rooms={expandedOffer.bedroom_count}
               size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
               address={expandedOffer.street_address}
               downPayment={expandedOffer.down_payment_required}
@@ -75,7 +80,14 @@ function Home() {
               zipCode={expandedOffer.zip_code}
               bathroomCount={expandedOffer.bathroom_count}
               risks={expandedOffer.risks}
-              onClose={() => setExpandedOffer(null)}
+              actionButton={
+                <button 
+                  onClick={() => setExpandedOffer(null)}
+                  className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
+                >
+                  Close
+                </button>
+              }
             />
           </div>
         </div>
