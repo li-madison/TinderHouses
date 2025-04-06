@@ -44,7 +44,7 @@ function Home() {
             key={offer.id || index}
             image={offer.img}
             city={offer.city}
-            price={`$${offer.price}`}
+            price={Number(offer.price).toLocaleString()}
             rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={

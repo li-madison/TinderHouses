@@ -59,7 +59,7 @@ function Expanded({
             )}
           </div>
           {price && (
-            <div className="text-xl font-bold text-[#4F3527]">${price}</div>
+            <div className="text-xl font-bold text-[#4F3527]">${Number(price).toLocaleString()}</div>
           )}
         </div>
 

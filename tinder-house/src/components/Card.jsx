@@ -39,7 +39,7 @@ function Card({
         )}
         {price && (
           <div className="flex justify-between items-center pt-2">
-            <div className="text-xl font-bold text-[#4F3527]">{price}</div>
+            <div className="text-xl font-bold text-[#4F3527]">${price}</div>
             {actionButton}
           </div>
         )}
