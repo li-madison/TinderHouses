@@ -12,7 +12,7 @@ const cards = [
   {type: "video", title: "Mistakes First-Time Home Buyers Make", url: "https://www.youtube.com/watch?v=yIGgL-6jyC4"},
   {type: "video", title: "How to Buy A House", url: "https://www.youtube.com/watch?v=fBP2E8J6SZ0"},
   {type: "video", title: "Buying a home in 3 MONTHS? Here's Your Gameplan", url: "https://www.youtube.com/watch?v=AiXb_c9kmM8"},
-  {type: "article", title: "Want to Buy a House in 2025? Follow these 14 Steps", images:[]}
+  {type: "article", title: "Want to Buy a House in 2025? Follow these 14 Steps", images:["https://www.usnews.com/object/image/00000195-8b30-d527-a5b7-cf70addc0000/gettyimages-1769097467.jpg?update-time=1741797015416&size=responsive970"]}
 ];
 
 function CardContent({ card }) {
@@ -30,7 +30,7 @@ function CardContent({ card }) {
     return (
       <div className="flex flex-col h-full">
         <h2 className="text-xl font-semibold mb-2">{card.title}</h2>
-        <div className="w-full h-72 flex overflow-x-auto gap-6"></div>
+        <div className="w-36 h-full flex overflow-x-auto gap-6"></div>
           {card.images.map((image, i) => (
             <img key={i} src={image} alt={`article-image-${i}`} className="h-full object-cover rounded-md shadow-md" />
           ))}
@@ -56,7 +56,7 @@ function Finance() {
         <div className="w-full h-full flex overflow-x-auto gap-6 justify-start">
           {cards.filter(card => card.type === 'video').map((card, i) => (
             <div key={i} className="min-w-[20rem] h-72 bg-stone-700 rounded-[10px] shadow-md flex-shrink-0">
-              <CardContent card={videos} />
+              <CardContent card={card} />
             </div>
           ))}
         </div>
@@ -67,8 +67,8 @@ function Finance() {
         <h2 className="text-4xl font-extrabold text-center text-black font-montserrat mb-8">Articles</h2>
         <div className="flex overflow-x-auto gap-6 justify-center">
           {cards.filter(card => card.type === 'article').map((card, i) => (
-            <div key={i} className="min-w-[20rem] h-96 bg-stone-300 rounded-[10px] shadow-md flex-shrink-0">
-              <CardContent card={article} />
+            <div key={i} className="w-96 h-72 bg-stone-300 rounded-[10px] shadow-md flex-shrink-0">
+              <CardContent card={card} />
             </div>
           ))}
         </div>
