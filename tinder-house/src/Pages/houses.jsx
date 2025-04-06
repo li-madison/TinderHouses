@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaXmark, FaRegHeart } from 'react-icons/fa6';
 import listingsData from './real_estate_houses_with_ids.json'; // adjust the path if needed
+import Card from '../components/Card'; 
 import { LuBedDouble } from "react-icons/lu";
 import { LuToilet } from "react-icons/lu";
 
