@@ -90,7 +90,7 @@ function Matches() {
             animate={{ opacity: 1, y: 0 }}
             exit={exitAnimation[swipeDirection] || { opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-stone-300 w-[90%] md:w-[50%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
+            className="bg-[#DDC7BB] w-[90%] md:w-[50%] rounded-2xl shadow-md overflow-hidden flex flex-col space-y-2 m-8"
           >
             <div className="flex flex-col space-x-2">
               <img
