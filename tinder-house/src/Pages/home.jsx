@@ -68,27 +68,21 @@ function Home() {
       {expandedOffer && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-2/3">
-            <Expanded
-              image={expandedOffer.img}
-              city={expandedOffer.city}
-              price={expandedOffer.price}
-              rooms={expandedOffer.bedroom_count}
-              size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
-              address={expandedOffer.street_address}
-              downPayment={expandedOffer.down_payment_required}
-              state={expandedOffer.state}
-              zipCode={expandedOffer.zip_code}
-              bathroomCount={expandedOffer.bathroom_count}
-              risks={expandedOffer.risks}
-              actionButton={
-                <button 
-                  onClick={() => setExpandedOffer(null)}
-                  className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
-                >
-                  Close
-                </button>
-              }
-            />
+          <Expanded
+  image={expandedOffer.img}
+  city={expandedOffer.city}
+  price={expandedOffer.price}
+  rooms={expandedOffer.bedroom_count}
+  size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+  address={expandedOffer.street_address}
+  downPayment={expandedOffer.down_payment_required}
+  state={expandedOffer.state}
+  zipCode={expandedOffer.zip_code}
+  bathroomCount={expandedOffer.bathroom_count}
+  risks={expandedOffer.risks}
+  onClose={() => setExpandedOffer(null)}
+/>
+
           </div>
         </div>
       )}
