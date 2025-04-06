@@ -29,11 +29,20 @@ function Matches() {
     // Shuffle the listings data before setting it
     let filteredListings = listingsData;
     if (profile && profile.city) {
-      filteredListings = listingsData.filter(
-        (listing) => listing.city.toLowerCase() === profile.city.toLowerCase()
+      const cityFiltered = listingsData.filter(
+        (listing) =>
+          listing.city.toLowerCase() === profile.city.toLowerCase()
       );
+      setListings(shuffleArray(filteredListings));
+      if (cityFiltered.length > 0) {
+        filteredListings = cityFiltered;
+      }
   }
+
+
+
   setListings(shuffleArray(filteredListings));
+  
  }, [profile]);
 
 
