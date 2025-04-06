@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import houseData from '../real_estate_houses.json'; // Assuming the path is correct
+import houseData from '../Pages/real_estate_houses_with_ids.json'; // Assuming the path is correct
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -174,7 +174,7 @@ const Chatbot = () => {
                 <span style={{
                   padding: '8px 12px',
                   borderRadius: '15px',
-                  backgroundColor: msg.sender === 'user' ? '#007bff' : '#e9ecef',
+                  backgroundColor: msg.sender === 'user' ? '#4F3527' : '#e9ecef',
                   color: msg.sender === 'user' ? 'white' : 'black',
                   display: 'inline-block',
                   maxWidth: '80%',
@@ -197,7 +197,7 @@ const Chatbot = () => {
               style={{ flexGrow: 1, marginRight: '10px', padding: '8px', borderRadius: '5px', border: '1px solid #ccc' }}
               placeholder="Ask about houses..."
             />
-            <button onClick={handleSend} style={{ padding: '8px 15px', borderRadius: '5px', border: 'none', backgroundColor: '#007bff', color: 'white', cursor: 'pointer' }}>
+            <button onClick={handleSend} style={{ padding: '8px 15px', borderRadius: '5px', border: 'none', backgroundColor: '#4F3527', color: 'white', cursor: 'pointer' }}>
               Send
             </button>
           </div>
@@ -209,7 +209,7 @@ const Chatbot = () => {
         width: '60px',
         height: '60px',
         borderRadius: '50%',
-        backgroundColor: '#007bff',
+        backgroundColor: '#4F3527',
         color: 'white',
         border: 'none',
         fontSize: '24px',
