@@ -1,26 +1,30 @@
+// Home.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json';
 import Card from '../components/Card';
+import Expanded from '../components/Expanded'; // Import the Expanded component
 
 function Home() {
-  const [offers, setOffers] = useState([])
+  const [offers, setOffers] = useState([]);
+  const [expandedOffer, setExpandedOffer] = useState(null); // Added state for expanded offer
 
   useEffect(() => {
-    // Assuming listingsData is an array, take the first three items
+    // Take the first three items from the listings
     const threeOffers = listingsData.slice(0, 3);
     setOffers(threeOffers);
   }, []);
 
   return (
     <div className="min-h-screen bg-[#FEF7F2] flex flex-col p-6 space-y-10">
+      
       {/* Header Section */}
       <div className="flex flex-col items-center space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between">
         <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
           Find Your <br className="lg:hidden" /> Dream Home
         </div>
-        <div className="text-lg font-bold text-[#4F3527] max-w-xl text-center">
-          blahblahblah<br />-<br />-<br />-
+        <div className="text-lg text-[#2B1B12] font-montserrat text-center">
+          Explore the best offers in your area
         </div>
         <Link
           to="/register"
@@ -40,15 +44,14 @@ function Home() {
         {offers.map((offer, index) => (
           <Card
             key={offer.id || index}
-            image={offer.img} // ensure your JSON file has an "img" field or adjust accordingly
+            image={offer.img}
             city={offer.city}
             price={`$${offer.price}`}
             rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
-            
             actionButton={
               <button
-                onClick={() => setModalOpen(true)}
+                onClick={() => setExpandedOffer(offer)} // Open the expanded view for this offer
                 className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
               >
                 More
@@ -58,30 +61,33 @@ function Home() {
         ))}
       </div>
 
-      
-      {/* Expanded Component */}
+      {/* Expanded Component Popup */}
       {expandedOffer && (
-        <Expanded
-          image={expandedOffer.img}
-          city={expandedOffer.city}
-          price={expandedOffer.price}
-          rooms={expandedOffer.bedroom_count}
-          size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
-          address={expandedOffer.street_address}
-          downPayment={expandedOffer.down_payment_required}
-          state={expandedOffer.state}
-          zipCode={expandedOffer.zip_code}
-          bathroomCount={expandedOffer.bathroom_count}
-          risks={expandedOffer.risks}
-          actionButton={
-            <button 
-              onClick={() => setExpandedOffer(null)}
-              className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          }
-        />
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <Expanded
+              image={expandedOffer.img}
+              city={expandedOffer.city}
+              price={expandedOffer.price}
+              rooms={expandedOffer.bedroom_count}
+              size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+              address={expandedOffer.street_address}
+              downPayment={expandedOffer.down_payment_required}
+              state={expandedOffer.state}
+              zipCode={expandedOffer.zip_code}
+              bathroomCount={expandedOffer.bathroom_count}
+              risks={expandedOffer.risks}
+              actionButton={
+                <button 
+                  onClick={() => setExpandedOffer(null)} // Close the expanded view
+                  className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
+                >
+                  Close
+                </button>
+              }
+            />
+          </div>
+        </div>
       )}
     </div>
   );
