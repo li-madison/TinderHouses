@@ -16,6 +16,21 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-[#FEF7F2] flex flex-col p-6 space-y-10">
+      {/* Header Section */}
+      <div className="flex flex-col items-center space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between">
+        <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
+          Find Your <br className="lg:hidden" /> Dream Home
+        </div>
+        <div className="text-lg text-[#2B1B12] font-montserrat text-center">
+          Explore the best offers in your area
+        </div>
+        <Link
+          to="/register"
+          className="bg-[#2B1B12] text-white font-semibold text-lg px-6 py-3 rounded-lg mt-4 lg:mt-0"
+        >
+          Sign up
+        </Link>
+      </div>
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {offers.map((offer, index) => (
