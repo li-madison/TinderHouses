@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json';
@@ -45,7 +44,7 @@ function Home() {
             key={offer.id || index}
             image={offer.img}
             city={offer.city}
-            price={`$${offer.price}`}
+            price={Number(offer.price).toLocaleString()}
             rooms={`${offer.bedroom_count} Rooms`}
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={
@@ -68,7 +67,7 @@ function Home() {
               image={expandedOffer.img}
               city={expandedOffer.city}
               price={expandedOffer.price}
-              rooms={expandedOffer.bedroom_count}
+              rooms={`${expandedOffer.bedroom_count} Rooms`}
               size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
               address={expandedOffer.street_address}
               downPayment={expandedOffer.down_payment_required}
@@ -76,14 +75,7 @@ function Home() {
               zipCode={expandedOffer.zip_code}
               bathroomCount={expandedOffer.bathroom_count}
               risks={expandedOffer.risks}
-              actionButton={
-                <button 
-                  onClick={() => setExpandedOffer(null)}
-                  className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
-                >
-                  Close
-                </button>
-              }
+              onClose={() => setExpandedOffer(null)}
             />
           </div>
         </div>
