@@ -26,7 +26,7 @@ function Card({
           <div className="pt-2 pb-2 text-xl">
             <div className="flex flex-row items-center">
               <LuBedDouble />
-              <p className="pl-4">{rooms} Rooms</p>
+              <p className="pl-4">{rooms}</p>
             </div>
             <div className="flex flex-row items-center">
               <MdSquareFoot className="w-6 h-6" />

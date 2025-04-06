@@ -20,9 +20,17 @@ function Expanded({
   additionalDetails 
 }) {
   return (
-    <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col">
-      <img src={image} alt={city} className="w-full h-64 object-cover" />
-      <div className="p-4 space-y-2">
+    <div className="bg-stone-300 rounded-2xl shadow-md overflow-hidden flex flex-col md:flex-row">
+      {/* Image Column: less than half (1/3 of width) */}
+      <div className="md:w-1/3">
+        <img 
+          src={image} 
+          alt={city} 
+          className="w-full h-64 md:h-full object-cover" 
+        />
+      </div>
+      {/* Text Column: occupies 2/3 of the width */}
+      <div className="p-4 md:w-2/3 space-y-2">
         {/* City Section */}
         <div className="flex items-center space-x-2">
           <FiMapPin className="w-6 h-6" />
@@ -34,11 +42,11 @@ function Expanded({
           <div className="pt-2 pb-2 text-xl">
             <div className="flex flex-row items-center">
               <LuBedDouble />
-              <p className="pl-4">{rooms} Rooms</p>
+              <p className="pl-4">{rooms}</p>
             </div>
             <div className="flex flex-row items-center">
               <MdSquareFoot className="w-6 h-6" />
-              <p className="pl-4">{size} sq ft</p>
+              <p className="pl-4">{size}</p>
             </div>
           </div>
         )}
@@ -67,15 +75,17 @@ function Expanded({
           </ul>
         </div>
 
-        {/* Risks Section */}
+        {/* Risks Section - Only show risks above moderate (i.e. "High") */}
         {risks && (
           <div className="pt-4">
             <h3 className="text-lg font-bold text-[#2B1B12] mb-2">Risks</h3>
             <ul className="text-base text-stone-700 space-y-1">
-              {Object.entries(risks).map(([riskName, riskLevel]) => (
-                <li key={riskName}>
-                  {riskName.replace(/_/g, " ")}: {riskLevel}
-                </li>
+              {Object.entries(risks)
+                .filter(([riskName, riskLevel]) => riskLevel === "Moderate" || riskLevel === "High")
+                .map(([riskName, riskLevel]) => (
+                  <li key={riskName}>
+                    {riskName.replace(/_/g, " ")}: {riskLevel}
+                  </li>
               ))}
             </ul>
           </div>

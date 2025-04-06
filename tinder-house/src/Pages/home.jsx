@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import listingsData from './real_estate_houses_with_ids.json';
 import Card from '../components/Card';
-import Expanded from '../components/Expanded'; // Import the Expanded component
+import Expanded from '../components/Expanded';
 
 function Home() {
   const [offers, setOffers] = useState([]);
-  const [expandedOffer, setExpandedOffer] = useState(null); // Added state for expanded offer
+  const [expandedOffer, setExpandedOffer] = useState(null);
 
   useEffect(() => {
     // Take the first three items from the listings
@@ -17,7 +17,6 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-[#FEF7F2] flex flex-col p-6 space-y-10">
-      
       {/* Header Section */}
       <div className="flex flex-col items-center space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between">
         <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
@@ -51,7 +50,7 @@ function Home() {
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             actionButton={
               <button
-                onClick={() => setExpandedOffer(offer)} // Open the expanded view for this offer
+                onClick={() => setExpandedOffer(offer)}
                 className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
               >
                 More
@@ -64,7 +63,7 @@ function Home() {
       {/* Expanded Component Popup */}
       {expandedOffer && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-2/3">
             <Expanded
               image={expandedOffer.img}
               city={expandedOffer.city}
@@ -79,7 +78,7 @@ function Home() {
               risks={expandedOffer.risks}
               actionButton={
                 <button 
-                  onClick={() => setExpandedOffer(null)} // Close the expanded view
+                  onClick={() => setExpandedOffer(null)}
                   className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
                 >
                   Close
