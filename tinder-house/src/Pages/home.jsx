@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import listingsData from './real_estate_houses_with_ids.json'; // adjust the path if needed
-import Card from '../components/Card'; // make sure this path is correct
-import Expanded from '../components/Expanded'; 
+import listingsData from './real_estate_houses_with_ids.json';
+import Card from '../components/Card';
 
 function Home() {
   const [offers, setOffers] = useState([]);
@@ -49,7 +48,10 @@ function Home() {
             size={`${offer.sq_ft ? offer.sq_ft : 'N/A'} sq ft`}
             
             actionButton={
-              <button className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg">
+              <button
+                onClick={() => setModalOpen(true)}
+                className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
+              >
                 More
               </button>
             }
@@ -57,8 +59,9 @@ function Home() {
         ))}
       </div>
 
-       {/* Expanded Component */}
-       {expandedOffer && (
+      
+      {/* Expanded Component */}
+      {expandedOffer && (
         <Expanded
           image={expandedOffer.img}
           city={expandedOffer.city}
