@@ -19,8 +19,8 @@ function Home() {
         <div className="text-5xl font-extrabold text-[#2B1B12] font-montserrat text-center">
           Find Your <br className="lg:hidden" /> Dream Home
         </div>
-        <div className="text-lg font-bold text-[#4F3527] max-w-xl text-center">
-          blahblahblah<br />-<br />-<br />-
+        <div className="text-lg text-[#2B1B12] font-montserrat text-center">
+          Explore the best offers in your area
         </div>
         <Link
           to="/register"
@@ -54,6 +54,34 @@ function Home() {
           />
         ))}
       </div>
+
+         {/* Expanded Component */}
+      {expandedOffer && (
+        <Expanded
+          image={expandedOffer.img}
+          city={expandedOffer.city}
+          price={expandedOffer.price}
+          rooms={expandedOffer.bedroom_count}
+          size={`${expandedOffer.sq_ft ? expandedOffer.sq_ft : 'N/A'} sq ft`}
+          address={expandedOffer.street_address}
+          downPayment={expandedOffer.down_payment_required}
+          state={expandedOffer.state}
+          zipCode={expandedOffer.zip_code}
+          bathroomCount={expandedOffer.bathroom_count}
+          risks={expandedOffer.risks}
+          actionButton={
+            <button 
+              onClick={() => setExpandedOffer(null)}
+              className="bg-[#2B1B12] text-white text-sm font-semibold px-4 py-2 rounded-lg"
+            >
+              Close
+            </button>
+          }
+        />
+      )}
+
+
+
     </div>
   );
 }
