@@ -4,8 +4,7 @@ import listingsData from './real_estate_houses_with_ids.json';
 import Card from '../components/Card';
 
 function Home() {
-  const [offers, setOffers] = useState([]);
-  const [expandedOffer, setExpandedOffer] = useState(null);
+  const [offers, setOffers] = useState([])
 
   useEffect(() => {
     // Assuming listingsData is an array, take the first three items
